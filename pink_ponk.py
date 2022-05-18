@@ -38,6 +38,9 @@ FPS = 60
 game = True
 finish = False
 
+speed_x = 3
+speed_y = 3
+
 ball = GameSprite("ball.png", 325, 200, 0, 15, 15)
 racket1 = Player ("wall.png", 30, 200, 4, 50, 150)
 racket2 = Player ("wall.png", 600, 200, 4, 50, 150)
@@ -50,6 +53,8 @@ while game:
             game = False#задай фон сцены
 
     if finish != True:
+        ball.rect.x += speed_x
+        ball.rect.y += speed_y
         ball.reset()
         racket1.update_l()
         racket2.update_r()
@@ -59,3 +64,4 @@ while game:
 
     display.update()
     clock.tick(FPS)
+
