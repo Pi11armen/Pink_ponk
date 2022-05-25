@@ -41,6 +41,12 @@ finish = False
 speed_x = 3
 speed_y = 3
 
+font.init()
+font1 = font.Font(None, 35)
+lose1 = font1.render("PLAYER 1 LOSE", True, (180, 0, 0))
+font2 = font.Font(None, 35)
+lose2 = font1.render("PLAYER 2 LOSE", True, (180, 0, 0))
+
 ball = GameSprite("ball.png", 325, 200, 0, 15, 15)
 racket1 = Player ("wall.png", 30, 200, 4, 50, 150)
 racket2 = Player ("wall.png", 600, 200, 4, 50, 150)
@@ -61,6 +67,22 @@ while game:
 
         racket1.reset()
         racket2.reset()
+
+    if sprite.collide_rect(racket1, ball) or sprite.collide_rect(racket2, ball):
+        speed_x *= -1
+
+    if ball.rect.y > win_height-50 or ball.rect.y < 0:
+        speed_y *= -1
+
+    if ball.rect.x < 0:
+        finish = True
+        window.blit(lose1, (200, 200))
+
+    if ball.rect.x > 701:
+        finish = True
+        window.blit(lose2, (200, 200))
+
+
 
     display.update()
     clock.tick(FPS)
